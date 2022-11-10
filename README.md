@@ -79,7 +79,7 @@ SQL assignment FIFA23 by Hampus, Tobias &amp; Tommi
 > SELECT COUNT(type)
 > FROM match_events
 > WHERE type = "goal"
-> AND match_id = 64
+> AND match_id = 61
 > AND time_regular >= 106
 > AND time_regular <= 120;
 
