@@ -66,7 +66,7 @@ SQL assignment FIFA23 by Hampus, Tobias &amp; Tommi
 
 #### All scores should contain info if it is after regular time (90+ minutes), after extra-time or after extra-time and penalty shoot-out
 
-// -----First half goals in final
+###### First half goals in final
 
 > SELECT COUNT(type)
 > FROM match_events
@@ -74,7 +74,8 @@ SQL assignment FIFA23 by Hampus, Tobias &amp; Tommi
 > AND match_id = 64
 > AND time_regular < 46;
 
-> //----- 2nd over time half goals in final
+###### 2nd over time half goals in final
+
 > SELECT COUNT(type)
 > FROM match_events
 > WHERE type = "goal"
@@ -82,7 +83,8 @@ SQL assignment FIFA23 by Hampus, Tobias &amp; Tommi
 > AND time_regular >= 106
 > AND time_regular <= 120;
 
-> //----- How many goals were made in the shootout, if you want to see missed penalties change shooutout goal to = 0
+###### How many goals were made in the shootout, if you want to see missed penalties change shooutout goal to = 0
+
 > SELECT COUNT(type)
 > FROM match_events
 > WHERE type = "shootout attempt"
