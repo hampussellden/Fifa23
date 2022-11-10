@@ -51,6 +51,8 @@ SQL assignment FIFA23 by Hampus, Tobias &amp; Tommi
 
 ##### Teams, players, goals, disciplinary, referee, venue, date, multiple players are often involved in a event
 
+###### Show a good overview of the game, not including player names
+
 > select distinct home.name as home_team, matches.results , away.name as away_team, venues.name as venue, referees.referee_team_id, matches.date from match_events
 > inner join matches
 > on matches.id = match_events.match_id
@@ -63,6 +65,36 @@ SQL assignment FIFA23 by Hampus, Tobias &amp; Tommi
 > INNER JOIN teams as away
 > on away.id = matches.away_team_id
 > where matches.id = 64;
+
+###### Shows a timeline of the games primary events, the last name of the affected player(s), the venue, referee and date
+
+> SELECT
+> me.match_id AS match,
+> me.time_regular,
+> me.time_extra as et,
+> me.type,
+> scorer.last_name AS scorer,
+> assist.last_name AS assistant,
+> teams.name as team_name,
+> cards.last_name as disciplinant,
+> sub_in.last_name,
+> sub_out.last_name,
+> venues.name,
+> referees.first_name as ref_FName, referees.last_name as ref_LName,
+> matches.date
+> FROM
+> match_events AS me
+> left JOIN players AS scorer ON scorer.id = me.scorer_id
+> left JOIN players AS assist ON assist.id = me.assist_id
+> left join players as cards on cards.id = me.yellow_card_id
+> left join players as sub_in on sub_in.id = me.sub_in_id
+> left join players as sub_out on sub_out.id = me.sub_out_id
+> left JOIN teams ON teams.id = scorer.team_id
+> left JOIN matches ON me.match_id = matches.id
+> left join venues on matches.venue_id = venues.id
+> left join referees on referees.referee_team_id = matches.referee_id
+> WHERE match_id = 64
+> group by me.time_regular;
 
 #### All scores should contain info if it is after regular time (90+ minutes), after extra-time or after extra-time and penalty shoot-out
 
